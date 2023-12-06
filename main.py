@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pickle
-import sklearn
+
 try:
     # Loading models
     dtr = pickle.load(open('dtr.pkl', 'rb'))
