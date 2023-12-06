@@ -5,11 +5,11 @@ import pickle
 try:
     # Loading models
     dtr = pickle.load(open('dtr.pkl', 'rb'))
-    preprocesser = pickle.load(open('preprocessor.pkl', 'rb'))
+    preprocesser = pickle.load(open('preprocesser.pkl', 'rb'))
 except Exception as e:
     st.error(f"Error loading models: {e}")
     dtr = None
-    preprocesser = None
+    preprocessor = None
 
 st.title('Crop Yield Prediction Per Country')
 
