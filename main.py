@@ -15,7 +15,7 @@ st.title('Crop Yield Prediction Per Country')
 
 st.markdown('## Crop Features Here')
 
-year = st.number_input('Year')
+year = st.slider('Year', min_value=2000, max_value=2023)
 average_rain_fall_mm_per_year = st.number_input('Average Rainfall (mm per year)')
 pesticides_tonnes = st.number_input('Pesticides (tonnes)')
 avg_temp = st.number_input('Average Temperature')
@@ -31,7 +31,7 @@ item= st.selectbox('Item',item_option)
 if st.button('Predict'):
     features = np.array([[area, item, year, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp]])
    
-    predicted_value = dtr.predict(preprocessor.transform(features))
+    predicted_value = dtr.predict(preprocessor.transform(features)).reshape(1,2)
 
 
     st.markdown('## Predicted Yield Productions:')
