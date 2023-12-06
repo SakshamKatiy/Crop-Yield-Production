@@ -29,11 +29,17 @@ item_option = ["Maize","Potatoes","Wheat","Rice, paddy","Soybeans","Sweet potato
 item= st.selectbox('Item',item_option)
 
 if st.button('Predict'):
-    features = np.array([[area, item, year, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp]])
-    predicted_value = dtr.predict(features)
-
-    st.markdown('## Predicted Yield Productions:')
-    st.write(predicted_value)
+    raw_features = np.array([[area, item, year, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp]])
+    
+    # Assuming preprocessor is already fitted
+    preprocessed_features = preprocessor.transform(raw_features)
+    
+    try:
+        predicted_value = dtr.predict(preprocessed_features)
+        st.markdown('## Predicted Yield Productions:')
+        st.write(predicted_value)
+    except Exception as e:
+        st.error(f"Error predicting: {e}")
 
 
 
