@@ -30,12 +30,7 @@ item= st.selectbox('Item',item_option)
 
 if st.button('Predict'):
     features = np.array([[area, item, year, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp]])
-    
-    # Add print statements for debugging
-    print(f"Original Features: {features}")
-    
-    transformed_features = preprocessor.transform(features) 
-    predicted_value = dtr.predict(transformed_features).reshape(1, -1)
+    predicted_value = dtr.predict(features)
 
     st.markdown('## Predicted Yield Productions:')
     st.write(predicted_value)
