@@ -5,11 +5,11 @@ import pickle
 try:
     # Loading models
     dtr = pickle.load(open('dtr.pkl', 'rb'))
-    preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
+    preprocesser = pickle.load(open('preprocessor.pkl', 'rb'))
 except Exception as e:
     st.error(f"Error loading models: {e}")
     dtr = None
-    preprocessor = None
+    preprocesser = None
 
 st.title('Crop Yield Prediction Per Country')
 
@@ -30,9 +30,8 @@ item= st.selectbox('Item',item_option)
 
 if st.button('Predict'):
     features = np.array([[area, item, year, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp]])
-   
-    predicted_value = dtr.predict(preprocessor.transform(features))
-
+    transformed_features = preprocesser.transform(features) 
+    predicted_value = dtr.predict(transformed_features).reshape(1, -1)
 
     st.markdown('## Predicted Yield Productions:')
     st.write(predicted_value)
